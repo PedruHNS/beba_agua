@@ -16,4 +16,3 @@ class ListPessoaNotifier extends StateNotifier<StateListPessoas> {
     state = StateListPessoaAdd(pessoas: lista);
   }
 }
-

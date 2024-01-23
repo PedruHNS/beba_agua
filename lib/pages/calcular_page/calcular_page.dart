@@ -1,6 +1,7 @@
 import 'package:beba_agua/pages/calcular_page/calcular_provider.dart';
 import 'package:beba_agua/pages/calcular_page/component/infos.dart';
 import 'package:beba_agua/pages/calcular_page/component/input.dart';
+
 import 'package:beba_agua/pages/home_page/list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +28,6 @@ class _CalcularPageState extends ConsumerState<CalcularPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(calcularProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -66,10 +66,11 @@ class _CalcularPageState extends ConsumerState<CalcularPage> {
                         peso: double.parse(_controllerPeso.text),
                         nome: _controllerNome.text,
                       );
+                  final state = ref.watch(calcularProvider);
                   ref.read(listPessoasProvider.notifier).add(state.pessoa);
+
                   Navigator.of(context).pop();
                 }
-
               },
               child: const Text('calcular'),
             ),
