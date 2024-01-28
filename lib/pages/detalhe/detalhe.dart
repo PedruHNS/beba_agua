@@ -11,13 +11,18 @@ class Detalhe extends StatelessWidget {
       appBar: AppBar(
         title: const Text('detalhe'),
       ),
-      body: Column(children: [
-        Text('${pessoa.nome}'),
-        Text('${pessoa.peso}'),
-        Text('${pessoa.ml}'),
-        Text('${pessoa.garrafa}'),
-        Text('${pessoa.copos}'),
-      ]),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Nome: ${pessoa.nome}'),
+            Text('Peso: ${pessoa.peso} Kg'),
+            Text('ingerir: ${pessoa.ml} Ml'),
+            Text('Qtd de Garrafas: ${pessoa.garrafa!.floor()}'),
+            Text('Qtd de Copos: ${pessoa.copos!.floor()}'),
+          ],
+        ),
+      ),
     );
   }
 }

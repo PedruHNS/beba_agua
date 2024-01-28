@@ -1,5 +1,5 @@
 import 'package:beba_agua/model/pessoa.dart';
-import 'package:beba_agua/pages/calcular_page/component/card_custom.dart';
+
 import 'package:beba_agua/pages/home_page/component/card_custom.dart';
 import 'package:flutter/material.dart';
 
