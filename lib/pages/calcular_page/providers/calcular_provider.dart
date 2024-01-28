@@ -1,7 +1,7 @@
 import 'package:beba_agua/model/pessoa.dart';
-import 'package:beba_agua/pages/calcular_page/state_calcular.dart';
-import 'package:beba_agua/pages/home_page/list_provider.dart';
-import 'package:beba_agua/pages/home_page/state_list.dart';
+import 'package:beba_agua/pages/calcular_page/providers/state_calcular.dart';
+
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final calcularProvider =

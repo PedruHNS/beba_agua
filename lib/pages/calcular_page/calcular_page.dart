@@ -1,8 +1,8 @@
-import 'package:beba_agua/pages/calcular_page/calcular_provider.dart';
 import 'package:beba_agua/pages/calcular_page/component/infos.dart';
 import 'package:beba_agua/pages/calcular_page/component/input.dart';
+import 'package:beba_agua/pages/calcular_page/providers/calcular_provider.dart';
+import 'package:beba_agua/pages/home_page/providers/list_provider.dart';
 
-import 'package:beba_agua/pages/home_page/list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,51 +31,70 @@ class _CalcularPageState extends ConsumerState<CalcularPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text('calculo beba agua'),
+        title: const Text('CALCULE'),
       ),
-      body: Form(
-        key: _formkey,
-        child: Column(
-          children: [
-            Input(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'campo obrigatorio';
-                }
-                return null;
-              },
-              controller: _controllerNome,
-              label: 'Nome',
-              keyboard: TextInputType.text,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                Input(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'campo obrigatorio';
+                    }
+                    return null;
+                  },
+                  controller: _controllerNome,
+                  label: 'Nome',
+                  keyboard: TextInputType.text,
+                ),
+                Input(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'campo obrigatorio';
+                    } else if (value.contains(',')) {
+                      return 'use ponto';
+                    } else if (double.parse(value) < 0) {
+                      return 'valor invalido';
+                    } else if (double.parse(value) > 500) {
+                      return 'valor invalido';
+                    } else if (double.tryParse(value) == null) {
+                      return 'Peso inválido';
+                    }
+                    return null;
+                  },
+                  controller: _controllerPeso,
+                  label: 'Peso (Kg)',
+                  keyboard: TextInputType.number,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formkey.currentState!.validate()) {
+                        ref.read(calcularProvider.notifier).calcular(
+                              peso: double.parse(_controllerPeso.text),
+                              nome: _controllerNome.text,
+                            );
+                        final state = ref.watch(calcularProvider);
+                        ref
+                            .read(listPessoasProvider.notifier)
+                            .add(state.pessoa);
+                        _controllerNome.clear();
+                        _controllerPeso.clear();
+                      }
+                    },
+                    child: const Text('calcular'),
+                  ),
+                ),
+                const InfosComponent()
+              ],
             ),
-            Input(
-              validator: (value) {
-                if (value == null || value.isEmpty || !value.contains('.')) {
-                  return 'campo obrigatorio';
-                }
-                return null;
-              },
-              controller: _controllerPeso,
-              label: 'Peso (Kg)',
-              keyboard: TextInputType.number,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formkey.currentState!.validate()) {
-                  ref.read(calcularProvider.notifier).calcular(
-                        peso: double.parse(_controllerPeso.text),
-                        nome: _controllerNome.text,
-                      );
-                  final state = ref.watch(calcularProvider);
-                  ref.read(listPessoasProvider.notifier).add(state.pessoa);
-
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text('calcular'),
-            ),
-            const InfosComponent()
-          ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:beba_agua/model/pessoa.dart';
-import 'package:beba_agua/pages/home_page/state_list.dart';
+import 'package:beba_agua/pages/home_page/providers/state_list.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final listPessoasProvider =

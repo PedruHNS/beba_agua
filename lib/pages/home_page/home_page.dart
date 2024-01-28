@@ -1,4 +1,5 @@
-import 'package:beba_agua/pages/home_page/list_provider.dart';
+import 'package:beba_agua/pages/home_page/component/list_view_custom.dart';
+import 'package:beba_agua/pages/home_page/providers/list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -13,14 +14,9 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('home'),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamed('/detalhe', arguments: list.pessoas[index]);
-            },
-            child: ListTile(title: Text('${list.pessoas[index].nome}'))),
-        itemCount: list.pessoas.length,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListViewCustom(pessoas: list.pessoas),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
