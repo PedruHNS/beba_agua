@@ -12,18 +12,19 @@ class InfosComponent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final calc = ref.watch(calcularProvider);
     final info = calc.pessoa;
+
     return Column(
       children: [
         CardCustom(
-          value: '${info.ml} ML',
+          value: info.ml != null ? '${info.ml} ML' : '0 ML',
         ),
         CardCustom(
           icons: MdiIcons.bottleSoda,
-          value: '${info.garrafa!.floor()}',
+          value: info.garrafa != null ? '${info.garrafa!.floor()}' : '0',
         ),
         CardCustom(
           icons: MdiIcons.cup,
-          value: '${info.copos!.floor()}',
+          value: info.copos != null ? '${info.copos!.floor()}' : '0',
         ),
       ],
     );

@@ -13,3 +13,11 @@ final class StateListPessoaInitial extends StateListPessoas {
 final class StateListPessoaAdd extends StateListPessoas {
   StateListPessoaAdd({required super.pessoas});
 }
+
+final class StateListPessoaDelete extends StateListPessoas {
+  StateListPessoaDelete({required super.pessoas});
+}
+
+final class StateListPessoaLoad extends StateListPessoas {
+  StateListPessoaLoad({required super.pessoas});
+}
