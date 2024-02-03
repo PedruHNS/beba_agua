@@ -27,6 +27,6 @@ class ListPessoaNotifier extends StateNotifier<StateListPessoas> {
   }
 
   Future<void> delete(String id) async {
-    final pessoas = await localStorage.delete(id)
+    await localStorage.delete(id);
   }
 }

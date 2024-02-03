@@ -15,14 +15,13 @@ class ListViewCustom extends ConsumerWidget {
       itemBuilder: (context, index) => Dismissible(
         key: Key('${pessoas[index].id}'),
         onDismissed: (direction) {
-          ref.read(listPessoasProvider.notifier).delete(pessoas[index].id);
+          ref.read(listPessoasProvider.notifier).delete(pessoas[index].id!);
         },
         child: CardPessoaCustom(
           pessoa: pessoas[index],
         ),
       ),
       itemCount: pessoas.length,
-      
     );
   }
 }
